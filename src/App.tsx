@@ -14,11 +14,10 @@ const App: React.FC = () => {
         <button
           className="App-link"
           onClick={() => {
-            axios
-              .get('/api/customer/getCustomer', { params: { id: 123 } })
-              .then(res => {
-                console.warn(res);
-              });
+            let id = 1;
+            axios.get(`/api/customer/${id}`).then(res => {
+              console.warn(res);
+            });
           }}
         >
           API TEST
