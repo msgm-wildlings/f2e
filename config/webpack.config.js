@@ -167,17 +167,17 @@ module.exports = function(webpackEnv) {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].js'
-        : isEnvDevelopment && 'static/js/bundle.js',
-      // TODO: remove this when upgrading to webpack 5
+      filename: 'static/js/wildings.bundle.js',
+      //   ? 'static/js/[name].[contenthash:8].js'
+      //   : isEnvDevelopment && 'static/js/bundle.js',
+      // // TODO: remove this when upgrading to webpack 5
       futureEmitAssets: true,
       // There are also additional JS chunk files if you use code splitting.
-      chunkFilename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].chunk.js'
-        : isEnvDevelopment && 'static/js/[name].chunk.js',
-      // We inferred the "public path" (such as / or /my-project) from homepage.
-      // We use "/" in development.
+      chunkFilename: 'static/js/[name].wildings.chunk.js',
+      //   ? 'static/js/[name].[contenthash:8].chunk.js'
+      //   : isEnvDevelopment && 'static/js/[name].chunk.js',
+      // // We inferred the "public path" (such as / or /my-project) from homepage.
+      // // We use "/" in development.
       publicPath: publicPath,
       // Point sourcemap entries to original disk location (format as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction
@@ -556,7 +556,7 @@ module.exports = function(webpackEnv) {
           // Options similar to the same options in webpackOptions.output
           // both options are optional
           filename: 'static/css/[name].[contenthash:8].css',
-          chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
+          chunkFilename: 'static/css/wildings.chunk.css'
         }),
       // Generate a manifest file which contains a mapping of all asset filenames
       // to their corresponding output file so that tools can pick it up without
