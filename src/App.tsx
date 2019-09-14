@@ -1,28 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import { Button } from 'antd';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <button
-          className="App-link"
-          onClick={() => {
-            let id = 1;
-            axios.get(`/api/customer/${id}`).then(res => {
-              console.warn(res);
-            });
-          }}
-        >
-          API TEST
-        </button>
-      </header>
+      <Button
+        onClick={() => {
+          let id = 1;
+          axios.get(`/api/customer/${id}`).then(res => {
+            console.warn(res);
+          });
+        }}
+      >
+        ANTD BUTTON
+      </Button>
     </div>
   );
 };
