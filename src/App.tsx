@@ -1,17 +1,17 @@
-import React from 'react';
-import './App.css';
+import React, { FC } from 'react';
+import './App.scss';
 import axios from 'axios';
 import { Button } from 'antd';
 
-const App: React.FC = () => {
+const App: FC = () => {
   return (
     <div className="App">
       <Button
-        onClick={() => {
+        type="primary"
+        onClick={async () => {
           let id = 1;
-          axios.get(`/api/customer/${id}`).then(res => {
-            console.warn(res);
-          });
+          let res = await axios.get(`/api/customer/${id}`);
+          console.warn(res);
         }}
       >
         ANTD BUTTON
