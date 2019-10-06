@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import './App.scss';
 import { Menu, Icon, Layout } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Customer from './components/customer';
 
 const { Header, Sider, Content } = Layout;
 
@@ -12,9 +13,6 @@ const App: FC<AppProps> = ({ pathname }: AppProps) => {
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
-  };
-  const Home = () => {
-    return <h2>Home</h2>;
   };
 
   const About = () => {
@@ -29,7 +27,10 @@ const App: FC<AppProps> = ({ pathname }: AppProps) => {
     <Router>
       <Layout style={{ height: '100vh' }}>
         <Sider trigger={null} collapsible collapsed={collapsed}>
-          <div className="logo" />
+          <div className="logo">
+            <Icon type="home" />
+            <div>&ensp;野人格鬥體適能</div>
+          </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname!]}>
             <Menu.Item key="/">
               <Link to="/">
@@ -69,7 +70,7 @@ const App: FC<AppProps> = ({ pathname }: AppProps) => {
                   <Users />
                 </Route>
                 <Route path="/">
-                  <Home />
+                  <Customer />
                 </Route>
               </Switch>
             </div>
