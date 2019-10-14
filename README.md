@@ -1,3 +1,5 @@
+# Practice Doing One Thing At A Time - [TypeScript](https://www.typescriptlang.org/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
