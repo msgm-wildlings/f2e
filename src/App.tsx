@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Customer from './components/customer';
 
 const { Header, Sider, Content } = Layout;
-
+const { Item } = Menu;
 interface AppProps {
   pathname?: string;
 }
@@ -32,24 +32,24 @@ const App: FC<AppProps> = ({ pathname }: AppProps) => {
             <div>&ensp;野人格鬥體適能</div>
           </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname!]}>
-            <Menu.Item key="/">
+            <Item key="/">
               <Link to="/">
                 <Icon type="user" />
-                <span>Home</span>
+                <span>會員</span>
               </Link>
-            </Menu.Item>
-            <Menu.Item key="/about">
-              <Link to="/about">
-                <Icon type="video-camera" />
-                <span>About</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="/users">
+            </Item>
+            <Item key="/users">
               <Link to="/users">
-                <Icon type="upload" />
-                <span>Users</span>
+                <Icon type="carry-out" />
+                <span>課程</span>
               </Link>
-            </Menu.Item>
+            </Item>
+            <Item key="/about">
+              <Link to="/about">
+                <Icon type="info-circle" />
+                <span>關於野人</span>
+              </Link>
+            </Item>
           </Menu>
         </Sider>
         <Layout>
