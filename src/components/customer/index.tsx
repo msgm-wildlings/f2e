@@ -1,26 +1,31 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Input, Card, Table, Button, Row, Col } from 'antd';
+import { ColumnProps } from 'antd/es/table';
+
 import { getOrdersData } from './api';
-import { IUser } from '../interface';
+import { User } from '../interface';
 const { Search } = Input;
 
 const Customer: FC = () => {
-  const [users, setUsers] = useState<Array<IUser>>([]);
-  const columns = [
+  const [users, setUsers] = useState<Array<User>>([]);
+  const columns: ColumnProps<User>[] = [
     {
       title: '姓名',
       dataIndex: 'userName',
-      key: 'userName'
+      key: 'userName',
+      align: 'center'
     },
     {
       title: '身分證字號',
       dataIndex: 'userId',
-      key: 'userId'
+      key: 'userId',
+      align: 'center'
     }
   ];
+
   useEffect(() => {
     const fetchData = async () => {
-      let result: Array<IUser>;
+      let result: Array<User>;
       result = await getOrdersData();
       setUsers(result);
     };
@@ -54,7 +59,7 @@ const Customer: FC = () => {
         </Row>
       }
     >
-      <Table dataSource={users} columns={columns}></Table>
+      <Table<User> columns={columns} dataSource={users} />
     </Card>
   );
 };
