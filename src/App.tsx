@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import './App.scss';
 import { Menu, Icon, Layout } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
@@ -6,20 +6,20 @@ import Customer from './components/customer';
 
 const { Header, Sider, Content } = Layout;
 const { Item } = Menu;
-interface AppProps {
-  pathname?: string;
-}
-const App: FC<AppProps> = ({ pathname }: AppProps) => {
-  const [collapsed, setCollapsed] = useState(false);
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
 
-  const About = () => {
+const App: FC = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const pathname = window.location.pathname;
+
+  const toggleCollapsed = useCallback(() => {
+    setCollapsed(!collapsed);
+  }, []);
+
+  const About: FC = () => {
     return <h2>About</h2>;
   };
 
-  const Users = () => {
+  const Users: FC = () => {
     return <h2>Users</h2>;
   };
 
@@ -31,7 +31,7 @@ const App: FC<AppProps> = ({ pathname }: AppProps) => {
             <Icon type="home" />
             <div>&ensp;野人格鬥體適能</div>
           </div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname!]}>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
             <Item key="/">
               <Link to="/">
                 <Icon type="user" />
@@ -79,9 +79,6 @@ const App: FC<AppProps> = ({ pathname }: AppProps) => {
       </Layout>
     </Router>
   );
-};
-App.defaultProps = {
-  pathname: window.location.pathname
 };
 
 export default App;

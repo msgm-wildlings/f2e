@@ -25,8 +25,7 @@ const Customer: FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let result: Array<User>;
-      result = await getOrdersData();
+      const result: Array<User> = await getOrdersData();
       setUsers(result);
     };
     fetchData();
