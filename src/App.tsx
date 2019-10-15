@@ -3,7 +3,6 @@ import './App.scss';
 import { Menu, Icon, Layout } from 'antd';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Customer from './components/customer';
-
 const { Header, Sider, Content } = Layout;
 const { Item } = Menu;
 
@@ -20,6 +19,7 @@ const App: FC = () => {
   };
 
   const Users: FC = () => {
+    
     return <h2>Users</h2>;
   };
 

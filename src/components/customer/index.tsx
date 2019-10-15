@@ -9,6 +9,7 @@ const { Search } = Input;
 const Customer: FC = () => {
   const [users, setUsers] = useState<Array<User>>([]);
   const [filterNameOrId, setFilterNameOrId] = useState('');
+  const [customerCache,setCustomerCache]= useState<Array<User>>([]);
   const columns: ColumnProps<User>[] = [
     {
       title: '姓名',
@@ -26,15 +27,16 @@ const Customer: FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result: Array<User> = await getOrdersData();
-      setUsers(result);
+      const data = await getOrdersData();
+      setCustomerCache(data) ;
+      setUsers(data);
     };
     fetchData();
   }, []);
 
   useEffect(() => {
-    //filter
-    const newUsers: Array<User> = [];
+   
+    const newUsers: Array<User> = customerCache.filter(x=>x.userName!.includes(filterNameOrId));
     setUsers(newUsers);
   }, [filterNameOrId]);
 
@@ -51,7 +53,6 @@ const Customer: FC = () => {
           }
           size="large"
           onSearch={value => {
-            console.log(value, filterNameOrId);
             console.log('new user');
           }}
           onChange={e => setFilterNameOrId(e.target.value)}

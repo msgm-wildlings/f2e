@@ -159,6 +159,7 @@
     "lint"
   ],
   "devDependencies": {
+    "@babel/runtime": "^7.6.3",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
     "babel-plugin-import": "^1.12.1",
