@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Input, Card, Table, Button, Row, Col } from 'antd';
+import { Input, Card, Table, Icon } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 
 import { getOrdersData } from './api';
@@ -8,6 +8,7 @@ const { Search } = Input;
 
 const Customer: FC = () => {
   const [users, setUsers] = useState<Array<User>>([]);
+  const [filterNameOrId, setFilterNameOrId] = useState('');
   const columns: ColumnProps<User>[] = [
     {
       title: '姓名',
@@ -31,31 +32,30 @@ const Customer: FC = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    //filter
+    const newUsers: Array<User> = [];
+    setUsers(newUsers);
+  }, [filterNameOrId]);
+
   return (
     <Card
       title={
-        <Row gutter={16}>
-          <Col xs={17} sm={18} md={19} lg={20} xl={21}>
-            <Search
-              placeholder="輸入姓名或身分證字號"
-              enterButton="搜尋"
-              size="large"
-              onSearch={value => console.log(value)}
-            />
-          </Col>
-          <Col xs={7} sm={6} md={5} lg={4} xl={3}>
-            <Button
-              size="large"
-              block
-              type="primary"
-              icon="user-add"
-              // loading={this.state.iconLoading}
-              // onClick={this.enterIconLoading}
-            >
+        <Search
+          placeholder="輸入姓名或身分證字號"
+          enterButton={
+            <>
+              <Icon type="user-add" />
               新增
-            </Button>
-          </Col>
-        </Row>
+            </>
+          }
+          size="large"
+          onSearch={value => {
+            console.log(value, filterNameOrId);
+            console.log('new user');
+          }}
+          onChange={e => setFilterNameOrId(e.target.value)}
+        />
       }
     >
       <Table<User> columns={columns} dataSource={users} />
