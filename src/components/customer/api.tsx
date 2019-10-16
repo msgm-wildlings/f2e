@@ -1,10 +1,9 @@
 // import axios from 'axios';
-import { getFakeData } from './fakeData';
+import { getFakeData, getFakeUserDetail } from './fakeData';
 
-/*
- * 取得渠道列表
- */
-export const getOrdersData = () => Promise.resolve(getFakeData());
+export const getUserList = () => Promise.resolve(getFakeData());
+export const getUserDetail = (id?: string) =>
+  Promise.resolve(getFakeUserDetail(id));
 
 // return axios.get('/channel', { params: formData })
 //             .then(res => {

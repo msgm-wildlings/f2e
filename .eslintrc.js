@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended'
   ],
   globals: {
     Atomics: 'readonly',
@@ -22,7 +22,8 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     // 'no-non-null-assertion': true
-    "@typescript-eslint/explicit-function-return-type": "off"
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off'
   },
   settings: {
     linkComponents: [

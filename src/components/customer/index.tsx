@@ -1,42 +1,71 @@
-import React, { FC, useState, useEffect } from 'react';
-import { Input, Card, Table, Icon } from 'antd';
+import React, { FC, useState, useEffect, useCallback } from 'react';
+import { Input, Card, Table, Icon, Button } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 
-import { getOrdersData } from './api';
-import { User } from '../interface';
+import {
+  getUserList
+  // getUserDetail
+} from './api';
+import { IUserList } from '../interface';
+import UserForm from '../userForm';
 const { Search } = Input;
 
 const Customer: FC = () => {
-  const [users, setUsers] = useState<Array<User>>([]);
+  const [users, setUsers] = useState<Array<IUserList>>([]);
   const [filterNameOrId, setFilterNameOrId] = useState('');
-  const [customerCache,setCustomerCache]= useState<Array<User>>([]);
-  const columns: ColumnProps<User>[] = [
+  const [customerCache, setCustomerCache] = useState<Array<IUserList>>([]);
+  const [userFormVisible, setUserFormVisible] = useState(false);
+
+  const handleCancel = useCallback(() => {
+    setUserFormVisible(false);
+  }, []);
+  const handleSummit = useCallback(() => {}, []);
+  const columns: ColumnProps<IUserList>[] = [
     {
       title: '姓名',
-      dataIndex: 'userName',
-      key: 'userName',
-      align: 'center'
+      dataIndex: 'name',
+      key: 'name',
+      align: 'center',
+      // eslint-disable-next-line
+      render: (text, record, index) => {
+        // eslint-disable-next-line
+        const { id, name } = record;
+
+        // const UserDetail = getUserDetail(id);
+        return (
+          <Button
+            onClick={() => {
+              setUserFormVisible(true);
+            }}
+          >
+            {text}
+          </Button>
+        );
+      }
     },
     {
       title: '身分證字號',
-      dataIndex: 'userId',
-      key: 'userId',
+      dataIndex: 'id',
+      key: 'id',
       align: 'center'
     }
   ];
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getOrdersData();
-      setCustomerCache(data) ;
+      const data = await getUserList();
+      setCustomerCache(data);
       setUsers(data);
+      const result: Array<IUserList> = await getUserList();
+      setUsers(result);
     };
     fetchData();
   }, []);
 
   useEffect(() => {
-   
-    const newUsers: Array<User> = customerCache.filter(x=>x.userName!.includes(filterNameOrId));
+    const newUsers: Array<IUserList> = customerCache.filter(x =>
+      x.name!.includes(filterNameOrId)
+    );
     setUsers(newUsers);
   }, [filterNameOrId]);
 
@@ -53,14 +82,21 @@ const Customer: FC = () => {
           }
           size="large"
           onSearch={value => {
-            console.log('new user');
+            console.log('new user', value);
           }}
           onChange={e => setFilterNameOrId(e.target.value)}
         />
       }
     >
-      <Table<User> columns={columns} dataSource={users} />
+      <Table<IUserList> columns={columns} dataSource={users} />
+
+      <UserForm
+        visible={userFormVisible}
+        onCancel={handleCancel}
+        onSummit={handleSummit}
+      />
     </Card>
   );
 };
+
 export default Customer;
