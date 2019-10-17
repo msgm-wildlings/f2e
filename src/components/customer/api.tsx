@@ -1,8 +1,10 @@
 // import axios from 'axios';
 import { getFakeData, getFakeUserDetail } from './fakeData';
+import { IUserList, IUserDetail } from '../interface';
 
-export const getUserList = () => Promise.resolve(getFakeData());
-export const getUserDetail = (id?: string) =>
+export const getUserList = (): Promise<Array<IUserList>> =>
+  Promise.resolve(getFakeData());
+export const getUserDetail = (id?: string): Promise<IUserDetail> =>
   Promise.resolve(getFakeUserDetail(id));
 
 // return axios.get('/channel', { params: formData })

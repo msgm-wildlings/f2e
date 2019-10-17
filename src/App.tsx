@@ -12,14 +12,13 @@ const App: FC = () => {
 
   const toggleCollapsed = useCallback(() => {
     setCollapsed(!collapsed);
-  }, []);
+  }, [collapsed]);
 
   const About: FC = () => {
     return <h2>About</h2>;
   };
 
   const Users: FC = () => {
-    
     return <h2>Users</h2>;
   };
 
@@ -29,7 +28,7 @@ const App: FC = () => {
         <Sider trigger={null} collapsible collapsed={collapsed}>
           <div className="logo">
             <Icon type="home" />
-            <div>&ensp;野人格鬥體適能</div>
+            {collapsed ? null : <div>&ensp;野人格鬥體適能</div>}
           </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
             <Item key="/">

@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
-import { Input, Modal, Form } from 'antd';
-
+import { Form, Input, Modal } from 'antd';
 import { IUserForm } from '../interface';
-
 // eslint-disable-next-line
 const _UserForm: FC<IUserForm> = ({ visible, onCancel, onSummit, form }) => {
   //   const [users, setUsers] = useState<Array<IUserList>>([]);
@@ -17,19 +15,62 @@ const _UserForm: FC<IUserForm> = ({ visible, onCancel, onSummit, form }) => {
       title="Create a new collection"
       okText="Create"
     >
-      <Form layout="vertical">
-        <Form.Item label="Title">
-          {getFieldDecorator('title', {
+      <Form onSubmit={onSummit}>
+        <Form.Item label="姓名">
+          {getFieldDecorator('name', {
             rules: [
               {
+                type: 'name',
+                message: 'The input is not valid name!'
+              },
+              {
                 required: true,
-                message: 'Please input the title of collection!'
+                message: 'Please input your E-mail!'
               }
             ]
           })(<Input />)}
         </Form.Item>
-        <Form.Item label="Description">
-          {getFieldDecorator('description')(<Input type="textarea" />)}
+        <Form.Item label="E-mail">
+          {getFieldDecorator('email', {
+            rules: [
+              {
+                type: 'email',
+                message: 'The input is not valid E-mail!'
+              },
+              {
+                required: true,
+                message: 'Please input your E-mail!'
+              }
+            ]
+          })(<Input />)}
+        </Form.Item>
+        <Form.Item label="綽號">
+          {getFieldDecorator('nickname', {
+            rules: [
+              {
+                required: true,
+                message: 'Please input your nickname!',
+                whitespace: true
+              }
+            ]
+          })(<Input />)}
+        </Form.Item>
+        <Form.Item label="地址">
+          {getFieldDecorator('residence', {
+            rules: [
+              {
+                required: true,
+                message: 'Please select your habitual residence!'
+              }
+            ]
+          })(<Input />)}
+        </Form.Item>
+        <Form.Item label="電話號碼">
+          {getFieldDecorator('phone', {
+            rules: [
+              { required: true, message: 'Please input your phone number!' }
+            ]
+          })(<Input addonBefore="09" style={{ width: '100%' }} />)}
         </Form.Item>
       </Form>
     </Modal>

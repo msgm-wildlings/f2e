@@ -34,9 +34,10 @@ const Customer: FC = () => {
         // const UserDetail = getUserDetail(id);
         return (
           <Button
-            onClick={() => {
+            onClick={(): void => {
               setUserFormVisible(true);
             }}
+            size="large"
           >
             {text}
           </Button>
@@ -52,7 +53,7 @@ const Customer: FC = () => {
   ];
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (): Promise<void> => {
       const data = await getUserList();
       setCustomerCache(data);
       setUsers(data);
@@ -81,10 +82,10 @@ const Customer: FC = () => {
             </>
           }
           size="large"
-          onSearch={value => {
+          onSearch={(value): void => {
             console.log('new user', value);
           }}
-          onChange={e => setFilterNameOrId(e.target.value)}
+          onChange={(e): void => setFilterNameOrId(e.target.value)}
         />
       }
     >

@@ -1,10 +1,10 @@
 import faker from 'faker';
-import { IUserList } from '../interface';
+import { IUserList, IUserDetail } from '../interface';
 faker.seed(186);
 
 const DATA_LENGTH = 50;
 
-export const getFakeData = () => {
+export const getFakeData = (): Array<IUserList> => {
   const fakeData: Array<IUserList> = [];
 
   for (let i = 0; i < DATA_LENGTH; i++) {
@@ -17,14 +17,7 @@ export const getFakeData = () => {
   return fakeData;
 };
 
-export const getFakeUserDetail = (id?: string) => {
-  const fakeData: Array<IUserList> = [];
-  for (let i = 0; i < DATA_LENGTH; i++) {
-    fakeData[i] = {
-      id,
-      name: faker.name.findName(),
-      key: i
-    };
-  }
+export const getFakeUserDetail = (id?: string): IUserDetail => {
+  const fakeData: IUserDetail = { id };
   return fakeData;
 };
