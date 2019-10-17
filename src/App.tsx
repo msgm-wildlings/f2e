@@ -10,9 +10,10 @@ const App: FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = window.location.pathname;
 
-  const toggleCollapsed = useCallback(() => {
-    setCollapsed(!collapsed);
-  }, [collapsed]);
+  const toggleCollapsed = useCallback(
+    () => setCollapsed(prevCollapsed => !prevCollapsed),
+    []
+  );
 
   const About: FC = () => {
     return <h2>About</h2>;
