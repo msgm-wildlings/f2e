@@ -54,20 +54,22 @@ const Customer: FC = () => {
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
-      const data = await getUserList();
-      setCustomerCache(data);
-      setUsers(data);
       const result: Array<IUserList> = await getUserList();
+      setCustomerCache(result);
       setUsers(result);
     };
     fetchData();
   }, []);
 
   useEffect(() => {
-    const newUsers: Array<IUserList> = customerCache.filter(x =>
-      x.name!.includes(filterNameOrId)
+    const searchUserName: IUserList[] = customerCache.filter(customer =>
+      customer.name!.includes(filterNameOrId)
     );
-    setUsers(newUsers);
+    const searchUserId: IUserList[] = customerCache.filter(customer =>
+      customer.id!.includes(filterNameOrId)
+    );
+    const newUser: IUserList[] = [...searchUserName, ...searchUserId];
+    setUsers(newUser);
   }, [filterNameOrId]);
 
   return (
