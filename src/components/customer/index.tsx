@@ -3,8 +3,9 @@ import { Input, Card, Table, Icon, Button } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 
 import {
-  getUserList
+  getUserList,
   // getUserDetail
+  getCustomer
 } from './api';
 import { IUserList } from '../interface';
 import UserForm from '../userForm';
@@ -28,10 +29,7 @@ const Customer: FC = () => {
       align: 'center',
       // eslint-disable-next-line
       render: (text, record, index) => {
-        // eslint-disable-next-line
         const { id, name } = record;
-
-        // const UserDetail = getUserDetail(id);
         return (
           <Button
             onClick={(): void => {
@@ -56,6 +54,7 @@ const Customer: FC = () => {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       const result: Array<IUserList> = await getUserList();
+      getCustomer()
       setCustomerCache(result);
       setUsers(result);
     };
