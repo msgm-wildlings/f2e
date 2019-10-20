@@ -37,6 +37,7 @@ const Customer: FC = () => {
             onClick={(): void => {
               setUserFormVisible(true);
             }}
+            type="link"
             size="large"
           >
             {text}
