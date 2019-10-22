@@ -1,8 +1,18 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
-import { Carousel, Col, Divider, Form, Input, Modal, Steps } from 'antd';
+import {
+  Carousel,
+  Col,
+  Divider,
+  Form,
+  Input,
+  Modal,
+  Steps,
+  Checkbox
+} from 'antd';
 import { IUserForm } from '../interface';
 const { Step } = Steps;
 const { Item } = Form;
+const { Group } = Checkbox;
 
 const _UserForm: FC<IUserForm> = ({
   visible,
@@ -36,7 +46,7 @@ const _UserForm: FC<IUserForm> = ({
       </Steps>
       <Divider />
       <Form onSubmit={onSummit}>
-        <Carousel ref={sliderRef}>
+        <Carousel ref={sliderRef} initialSlide={currentStep}>
           <div>
             <Col span={12}>
               <Item
@@ -132,7 +142,6 @@ const _UserForm: FC<IUserForm> = ({
                 })(<Input size="large" />)}
               </Item>
             </Col>
-
             <Col span={24}>
               <Item
                 label="地址"
@@ -144,7 +153,53 @@ const _UserForm: FC<IUserForm> = ({
             </Col>
           </div>
           <div>
-            <h3>法定代理人核准</h3>
+            <Col span={12}>
+              <Item
+                label="代理人姓名"
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 18 }}
+              >
+                {getFieldDecorator('guardianName', {
+                  rules: [
+                    {
+                      required: true,
+                      message: '請輸入代理人姓名'
+                    }
+                  ]
+                })(<Input size="large" />)}
+              </Item>
+            </Col>
+            <Col span={12}>
+              <Item
+                label="身分證字號"
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 18 }}
+              >
+                {getFieldDecorator('id', { rules: [{ required: true }] })(
+                  <Input size="large" />
+                )}
+              </Item>
+            </Col>
+            <Col span={12}>
+              <Item
+                label="聯絡電話"
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 18 }}
+              >
+                {getFieldDecorator('phone', {
+                  rules: [{ required: true, message: '請輸入聯絡電話' }]
+                })(<Input size="large" />)}
+              </Item>
+            </Col>
+            <Col span={12}>
+              <Item
+                label="出生日期"
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 18 }}
+              >
+                {getFieldDecorator('dateOfBirth')(<Input size="large" />)}
+              </Item>
+            </Col>
           </div>
           <div>
             <h3>契約內容與免責聲明</h3>
