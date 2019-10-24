@@ -54,7 +54,7 @@ const Customer: FC = () => {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       const result: Array<IUserList> = await getUserList();
-      getCustomer()
+      getCustomer();
       setCustomerCache(result);
       setUsers(result);
     };

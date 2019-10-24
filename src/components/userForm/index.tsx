@@ -39,6 +39,8 @@ const _UserForm: FC<IUserForm> = ({
       okText="完成"
       cancelText="取消"
       width={modalWidth}
+      destroyOnClose
+      afterClose={() => setCurrentStep(0)}
     >
       <Steps current={currentStep} onChange={setCurrentStep}>
         <Step title="基本資料" description="Applicant Details" />
