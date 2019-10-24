@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormComponentProps } from 'antd/es/form';
 
-export interface IUserList {
+export interface IUser {
   name?: string;
   id?: string;
   key?: number;

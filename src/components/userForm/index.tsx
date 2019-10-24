@@ -21,7 +21,7 @@ const _UserForm: FC<IUserForm> = ({
   onSummit,
   form
 }: IUserForm) => {
-  //   const [users, setUsers] = useState<Array<IUserList>>([]);
+  //   const [users, setUsers] = useState<Array<IUser>>([]);
   const [currentStep, setCurrentStep] = useState(0);
   const sliderRef = useRef<Carousel>(null);
   const { getFieldDecorator } = form;

@@ -1,19 +1,20 @@
 import axios from 'axios';
 import { getFakeData, getFakeUserDetail } from './fakeData';
-import { IUserList, IUserDetail } from '../interface';
+import { IUser, IUserDetail } from '../interface';
 
-export const getUserList = (): Promise<Array<IUserList>> =>
-  Promise.resolve(getFakeData());
-export const getUserDetail = (id?: string): Promise<IUserDetail> =>
-  Promise.resolve(getFakeUserDetail(id));
-
-export const getCustomer = (id?: string): any => {
-  return axios
-    .get('/api/Customer')
-    .then(res => {
-      console.warn(res);
-    })
-    .catch(err => {
-      return Promise.reject(err);
+export const getCustomerList = async (): Promise<IUser[]> => {
+  const res = await axios.get('/api/Customer');
+  if (res.status === 200) {
+    const { data } = res;
+    return data.map((user: any) => {
+      const { id, personalId, name } = user;
+      const newUser: IUser = {
+        key: id,
+        id: personalId,
+        name: name
+      };
+      return newUser;
     });
+  }
+  return []
 };

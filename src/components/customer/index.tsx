@@ -3,25 +3,22 @@ import { Input, Card, Table, Icon, Button } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 
 import {
-  getUserList,
+  getCustomerList,
   // getUserDetail
-  getCustomer
 } from './api';
-import { IUserList } from '../interface';
+import { IUser } from '../interface';
 import UserForm from '../userForm';
 const { Search } = Input;
 
 const Customer: FC = () => {
-  const [users, setUsers] = useState<Array<IUserList>>([]);
+  const [users, setUsers] = useState<Array<IUser>>([]);
   const [filterNameOrId, setFilterNameOrId] = useState('');
-  const [customerCache, setCustomerCache] = useState<Array<IUserList>>([]);
+  const [customerCache, setCustomerCache] = useState<Array<IUser>>([]);
   const [userFormVisible, setUserFormVisible] = useState(false);
 
-  const handleCancel = useCallback(() => {
-    setUserFormVisible(false);
-  }, []);
+  const handleCancel = useCallback(() => setUserFormVisible(false), []);
   const handleSummit = useCallback(() => {}, []);
-  const columns: ColumnProps<IUserList>[] = [
+  const columns: ColumnProps<IUser>[] = [
     {
       title: '姓名',
       dataIndex: 'name',
@@ -53,8 +50,7 @@ const Customer: FC = () => {
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
-      const result: Array<IUserList> = await getUserList();
-      getCustomer();
+      const result: Array<IUser> = await getCustomerList();
       setCustomerCache(result);
       setUsers(result);
     };
@@ -62,13 +58,13 @@ const Customer: FC = () => {
   }, []);
 
   useEffect(() => {
-    const searchUserName: IUserList[] = customerCache.filter(customer =>
+    const searchUserName: IUser[] = customerCache.filter(customer =>
       customer.name!.includes(filterNameOrId)
     );
-    const searchUserId: IUserList[] = customerCache.filter(customer =>
+    const searchUserId: IUser[] = customerCache.filter(customer =>
       customer.id!.includes(filterNameOrId)
     );
-    const newUser: IUserList[] = [...searchUserName, ...searchUserId];
+    const newUser: IUser[] = [...searchUserName, ...searchUserId];
     setUsers(newUser);
   }, [filterNameOrId]);
 
@@ -91,7 +87,7 @@ const Customer: FC = () => {
         />
       }
     >
-      <Table<IUserList> columns={columns} dataSource={users} />
+      <Table<IUser> columns={columns} dataSource={users} />
 
       <UserForm
         visible={userFormVisible}
