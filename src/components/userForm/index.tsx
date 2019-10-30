@@ -19,6 +19,7 @@ const _UserForm: FC<IUserForm> = ({
   visible,
   onCancel,
   onSummit,
+  customerDetail,
   form
 }: IUserForm) => {
   //   const [users, setUsers] = useState<Array<IUser>>([]);
@@ -26,6 +27,19 @@ const _UserForm: FC<IUserForm> = ({
   const sliderRef = useRef<Carousel>(null);
   const { getFieldDecorator } = form;
 
+  useEffect(() => {
+    if (customerDetail) {
+      const {
+        customer
+        //  courseDetail
+      } = customerDetail;
+      console.warn(customer);
+      // customer 多塞的資料 => error log
+      // medicalCase
+      // id
+      form.setFieldsValue({ ...customer });
+    }
+  }, [customerDetail]);
   const modalWidth = document.body.clientWidth / 1.6;
   useEffect(() => {
     sliderRef!.current && sliderRef.current.goTo(currentStep, false);
@@ -40,7 +54,7 @@ const _UserForm: FC<IUserForm> = ({
       cancelText="取消"
       width={modalWidth}
       destroyOnClose
-      afterClose={() => setCurrentStep(0)}
+      afterClose={(): void => setCurrentStep(0)}
     >
       <Steps current={currentStep} onChange={setCurrentStep}>
         <Step title="基本資料" description="Applicant Details" />
@@ -82,7 +96,7 @@ const _UserForm: FC<IUserForm> = ({
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}
               >
-                {getFieldDecorator('id', { rules: [{ required: true }] })(
+                {getFieldDecorator('personalId', { rules: [{ required: true }] })(
                   <Input size="large" />
                 )}
               </Item>
@@ -120,7 +134,7 @@ const _UserForm: FC<IUserForm> = ({
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}
               >
-                {getFieldDecorator('dateOfBirth')(<Input size="large" />)}
+                {getFieldDecorator('birthday')(<Input size="large" />)}
               </Item>
             </Col>
             <Col span={12}>
@@ -140,7 +154,7 @@ const _UserForm: FC<IUserForm> = ({
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}
               >
-                {getFieldDecorator('emergencyContactPhone', {
+                {getFieldDecorator('emergencyPhone', {
                   rules: [{ required: true, message: '請輸入聯絡人電話' }]
                 })(<Input size="large" />)}
               </Item>
@@ -151,7 +165,7 @@ const _UserForm: FC<IUserForm> = ({
                 labelCol={{ span: 3 }}
                 wrapperCol={{ span: 21 }}
               >
-                {getFieldDecorator('residence')(<Input size="large" />)}
+                {getFieldDecorator('address')(<Input size="large" />)}
               </Item>
             </Col>
           </div>
@@ -178,7 +192,7 @@ const _UserForm: FC<IUserForm> = ({
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}
               >
-                {getFieldDecorator('id', { rules: [{ required: true }] })(
+                {getFieldDecorator('guardianPersonalId', { rules: [{ required: true }] })(
                   <Input size="large" />
                 )}
               </Item>
@@ -189,7 +203,7 @@ const _UserForm: FC<IUserForm> = ({
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}
               >
-                {getFieldDecorator('phone', {
+                {getFieldDecorator('guardianPhone', {
                   rules: [{ required: true, message: '請輸入聯絡電話' }]
                 })(<Input size="large" />)}
               </Item>
@@ -200,7 +214,7 @@ const _UserForm: FC<IUserForm> = ({
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}
               >
-                {getFieldDecorator('dateOfBirth')(<Input size="large" />)}
+                {getFieldDecorator('guardianBirthday')(<Input size="large" />)}
               </Item>
             </Col>
           </div>

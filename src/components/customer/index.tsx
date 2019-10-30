@@ -2,11 +2,8 @@ import React, { FC, useState, useEffect, useCallback } from 'react';
 import { Input, Card, Table, Icon, Button } from 'antd';
 import { ColumnProps } from 'antd/es/table';
 
-import {
-  getCustomerList,
-  // getUserDetail
-} from './api';
-import { IUser } from '../interface';
+import { getCustomerList, getCustomerDetail } from './api';
+import { IUser, ICustomerCourseDetail } from '../interface';
 import UserForm from '../userForm';
 const { Search } = Input;
 
@@ -15,6 +12,7 @@ const Customer: FC = () => {
   const [filterNameOrId, setFilterNameOrId] = useState('');
   const [customerCache, setCustomerCache] = useState<Array<IUser>>([]);
   const [userFormVisible, setUserFormVisible] = useState(false);
+  const [customerDetail, setCustomerDetail] = useState<ICustomerCourseDetail>();
 
   const handleCancel = useCallback(() => setUserFormVisible(false), []);
   const handleSummit = useCallback(() => {}, []);
@@ -26,10 +24,12 @@ const Customer: FC = () => {
       align: 'center',
       // eslint-disable-next-line
       render: (text, record, index) => {
-        const { id, name } = record;
+      // eslint-disable-next-line
+        const { id, name, key } = record;
         return (
           <Button
-            onClick={(): void => {
+            onClick={async (): Promise<void> => {
+              setCustomerDetail(await getCustomerDetail(key));
               setUserFormVisible(true);
             }}
             type="link"
@@ -93,6 +93,7 @@ const Customer: FC = () => {
         visible={userFormVisible}
         onCancel={handleCancel}
         onSummit={handleSummit}
+        customerDetail={customerDetail}
       />
     </Card>
   );
