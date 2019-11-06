@@ -82,6 +82,7 @@ const Customer: FC = () => {
           size="large"
           onSearch={(value): void => {
             console.log('new user', value);
+            setUserFormVisible(true)
           }}
           onChange={(e): void => setFilterNameOrId(e.target.value)}
         />
