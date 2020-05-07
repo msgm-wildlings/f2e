@@ -15,6 +15,7 @@ const Customer: FC = () => {
   const [customerDetail, setCustomerDetail] = useState<ICustomerCourseDetail>();
 
   const handleCancel = useCallback(() => setUserFormVisible(false), []);
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   const handleSummit = useCallback(() => {}, []);
   const columns: ColumnProps<IUser>[] = [
     {
@@ -24,7 +25,7 @@ const Customer: FC = () => {
       align: 'center',
       // eslint-disable-next-line
       render: (text, record, index) => {
-      // eslint-disable-next-line
+        // eslint-disable-next-line
         const { id, name, key } = record;
         return (
           <Button
@@ -82,7 +83,7 @@ const Customer: FC = () => {
           size="large"
           onSearch={(value): void => {
             console.log('new user', value);
-            setUserFormVisible(true)
+            setUserFormVisible(true);
           }}
           onChange={(e): void => setFilterNameOrId(e.target.value)}
         />
