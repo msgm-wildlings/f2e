@@ -47,27 +47,25 @@ const Customer: FC = () => {
       key: 'id',
       align: 'center',
     },
-  ]
+  ];
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
-      const result: Array<IUser> = await getCustomerList()
-      setCustomerCache(result)
-      setUsers(result)
-    }
-    fetchData()
-  }, [])
+      const result: Array<IUser> = await getCustomerList();
+      setCustomerCache(result);
+      setUsers(result);
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
-    const searchUserName: IUser[] = customerCache.filter(customer =>
-      customer.name!.includes(filterNameOrId)
-    )
-    const searchUserId: IUser[] = customerCache.filter(customer =>
-      customer.id!.includes(filterNameOrId)
-    )
-    const newUser: IUser[] = [...searchUserName, ...searchUserId]
-    setUsers(newUser)
-  }, [filterNameOrId])
+    const newUsers: IUser[] = customerCache.filter(
+      customer =>
+        String(customer.name!).includes(filterNameOrId) ||
+        String(customer.id!).includes(filterNameOrId)
+    );
+    setUsers(newUsers);
+  }, [filterNameOrId]);
 
   return (
     <Card
