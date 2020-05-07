@@ -11,7 +11,7 @@ export const getCustomerList = async (): Promise<IUser[]> => {
         const newUser: IUser = {
           key: id,
           id: personalId,
-          name: name
+          name: name,
         };
         return newUser;
       }

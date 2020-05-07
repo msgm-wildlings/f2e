@@ -1,27 +1,27 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true
+    es6: true,
   },
   extends: [
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
   ],
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {
-    '@typescript-eslint/no-non-null-assertion': 'off'
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
   settings: {
     linkComponents: [
@@ -29,19 +29,19 @@ module.exports = {
       'Hyperlink',
       {
         linkAttribute: 'to',
-        name: 'Link'
-      }
+        name: 'Link',
+      },
     ],
     propWrapperFunctions: [
       // The names of any function used to wrap propTypes, e.g. `forbidExtraProps`. If this isn't set, any propTypes wrapped in a function will be skipped.
       'forbidExtraProps',
       {
         object: 'Object',
-        property: 'freeze'
+        property: 'freeze',
       },
       {
-        property: 'myFavoriteWrapper'
-      }
+        property: 'myFavoriteWrapper',
+      },
     ],
     react: {
       createClass: 'createReactClass',
@@ -54,7 +54,7 @@ module.exports = {
       // default to "createReactClass"
       pragma: 'React',
       // Pragma to use, default to "React"
-      version: 'detect'
-    }
-  }
+      version: 'detect',
+    },
+  },
 };

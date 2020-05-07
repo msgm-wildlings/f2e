@@ -39,35 +39,35 @@ const Customer: FC = () => {
             {text}
           </Button>
         );
-      }
+      },
     },
     {
       title: '身分證字號',
       dataIndex: 'id',
       key: 'id',
-      align: 'center'
-    }
-  ];
+      align: 'center',
+    },
+  ]
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
-      const result: Array<IUser> = await getCustomerList();
-      setCustomerCache(result);
-      setUsers(result);
-    };
-    fetchData();
-  }, []);
+      const result: Array<IUser> = await getCustomerList()
+      setCustomerCache(result)
+      setUsers(result)
+    }
+    fetchData()
+  }, [])
 
   useEffect(() => {
     const searchUserName: IUser[] = customerCache.filter(customer =>
       customer.name!.includes(filterNameOrId)
-    );
+    )
     const searchUserId: IUser[] = customerCache.filter(customer =>
       customer.id!.includes(filterNameOrId)
-    );
-    const newUser: IUser[] = [...searchUserName, ...searchUserId];
-    setUsers(newUser);
-  }, [filterNameOrId]);
+    )
+    const newUser: IUser[] = [...searchUserName, ...searchUserId]
+    setUsers(newUser)
+  }, [filterNameOrId])
 
   return (
     <Card
