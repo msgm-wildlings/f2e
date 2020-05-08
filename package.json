@@ -2,7 +2,7 @@
   "name": "wildlings",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://msgm-wildlings.github.io/f2e/",
   "dependencies": {
     "@babel/core": "7.5.5",
     "@svgr/webpack": "4.3.2",
@@ -76,7 +76,9 @@
     "dev": "node scripts/start.js",
     "lint": "eslint src/*.tsx",
     "start": "node scripts/start.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -166,6 +168,7 @@
     "eslint": "^6.5.1",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.16.0",
+    "gh-pages": "^2.2.0",
     "pre-commit": "^1.2.2"
   },
   "proxy": "http://192.168.1.150:5002/"
